@@ -95,7 +95,11 @@ for(i in 1:length(weekname)){
 }
 
 #Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
-panel.smooth(x=dat_impute[,1],y=dat_impute[,4], type="l")
-plot(x=dat_impute[,1],y=dat_impute[,4], type="l")
-xyplot(dat_impute[,1]~dat_impute[,4],panel=panel.smoother,main="Time Series plot of interval versus weekday/weekend")
+steps_weekday <- tapply(dat_impute[,1],dat_impute[,4]%in%"weekday",mean)
+steps_weekend <- tapply(dat_impute[,1],dat_impute[,4]%in%"weekend",mean)
+
+par(mfrow=c(1,2))
+plot(dat_impute[,3],steps_weekday, type="l")
+hist(steps_weekday, main="Histogram of the total number of steps for weekday",xlab = "Steps")
+hist(steps_weekend, main="Histogram of the total number of steps for weekend",xlab = "Steps")
 ```
