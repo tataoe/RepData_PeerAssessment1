@@ -6,7 +6,7 @@ output:
 -----------------------------------------------------------
         
        
-      ## Loading and preprocessing the data
+## Loading and preprocessing the data
 
 ```r
 dat <- read.csv("activity.csv",stringsAsFactors=F, header=T)
@@ -45,7 +45,7 @@ hist(steps, main="Histogram of the total number of steps taken each day",
      xlab = "Steps")
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
+![plot of chunk mean total number of steps taken per day](figure/mean total number of steps taken per day-1.png) 
 
 ```r
 #3.Calculate and report the mean and median of the total number of steps taken
@@ -54,6 +54,7 @@ steps_mean <- tapply(dat_steps[,1],dat_steps[,2], mean)
 steps_median <- tapply(dat_steps[,1],dat_steps[,2], median)
 ```
 
+![Sample panel plot](instructions_fig/mean total number of steps taken per day-1.png)
 
 ## What is the average daily activity pattern?
 
@@ -63,7 +64,7 @@ steps_median <- tapply(dat_steps[,1],dat_steps[,2], median)
 plot(x=dat_steps[,3],y=dat_steps[,1],type="l")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![plot of chunk average daily activity pattern](figure/average daily activity pattern-1.png) 
 
 ```r
 #2.Which 5-minute interval, on average across all the days in the dataset,
@@ -75,6 +76,8 @@ dat_steps[which.max(dat_steps[,1]),]
 ##       steps       date interval
 ## 16492   806 2012-11-27      615
 ```
+
+![Sample panel plot](instructions_fig/average daily activity pattern-1.png) 
 
 
 ## Imputing missing values
@@ -125,7 +128,7 @@ impute_steps <- tapply(dat_impute[,1],dat_impute[,2],sum)
 hist(impute_steps, main="Histogram of the total number of steps taken each day",xlab = "Steps")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![plot of chunk Imputing missing values](figure/Imputing missing values-1.png) 
 
 ```r
 #Calculate the mean and median total number of steps taken per day
@@ -136,6 +139,8 @@ impute_steps_median <- tapply(dat_impute[,1],dat_impute[,2], median)
 
 #The number of rows have increased since we have included all the NA entires. On imputing the missing values, the dates(2012-10-01, 2012-11-09, 2012-11-10 and 2012-11-30) are assigned values 0 ie mean step value of all the dates 
 ```
+
+![Sample panel plot](instructions_fig/Imputing missing values-1.png) 
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -88024,5 +88029,13 @@ plot(x=dat_impute[,1],y=dat_impute[,4], type="l")
 
 ```
 ## Error in plot.window(...): need finite 'ylim' values
+```
+
+```r
+xyplot(dat_impute[,1]~dat_impute[,4],panel=panel.smoother,main="Time Series plot of interval versus weekday/weekend")
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "xyplot"
 ```
 
